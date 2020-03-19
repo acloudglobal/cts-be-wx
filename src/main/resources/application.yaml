@@ -1,0 +1,25 @@
+
+server:
+  port: 8080
+spring:
+  application:
+    name: cts-be-wx
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.16.1.4:3306/acloud_cts_wx?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root123456
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 20
+      connection-timeout: 10000
+      idle-timeout: 300000
+      max-lifetime: 900000
+  jpa:
+    #生产环境建议关闭
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+wechat:
+  appid: wx03e0541c60dbdbe1
+  secret: 16b1c5e170f63dbcfaf6fbc916769f51
