@@ -16,11 +16,6 @@ public class User {
     private String uid;
 
     /**
-     * 微信小程序用户唯一标识
-     */
-    private String openid;
-
-    /**
      * 账户编码
      */
     @Column(name = "acct_id")
@@ -52,6 +47,7 @@ public class User {
      */
     @Column(name = "create_time")
     private Date createTime;
+
 
     /**
      * 更新时间

@@ -27,14 +27,4 @@ public class UserController {
 
         userService.syncUser(dto);
     }
-
-    @PostMapping(value = "/unbind")
-    @ResponseBody
-    public void unbind(@Valid @RequestBody UnbindOpenIdVO vo) throws Exception {
-        UnbindOpenIdDTO dto = new UnbindOpenIdDTO();
-        dto.setOpenid(vo.getOpenid());
-        dto.setPassword(vo.getPassword());
-
-        userService.unbindOpenId(dto);
-    }
 }

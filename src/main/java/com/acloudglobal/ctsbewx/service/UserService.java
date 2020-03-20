@@ -21,11 +21,4 @@ public interface UserService {
      */
     void syncUser(SyncUserDTO dto) throws AppException;
 
-    /**
-     * 解绑微信信息
-     *
-     * @param dto 解绑信息
-     * @throws AppException 系统异常
-     */
-    void unbindOpenId(UnbindOpenIdDTO dto) throws AppException;
 }

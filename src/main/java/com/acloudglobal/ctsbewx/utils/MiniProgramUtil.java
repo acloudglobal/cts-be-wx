@@ -5,6 +5,7 @@ import com.acloudglobal.ctsbewx.dto.WxMessageJson;
 import com.acloudglobal.ctsbewx.exception.AppException;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.Response;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,7 +23,8 @@ public class MiniProgramUtil {
 
 
     public static OpenIdJson getOpenid(String appId, String appSecret, String code) throws Exception {
-        return get(String.format(WEI_XIN_API_URL, appId, appSecret, code));
+        Response response = HttpUtil.get(String.format(WEI_XIN_API_URL, appId, appSecret, code), null);
+        return HttpUtil.parseResponseToObject(response, OpenIdJson.class);
     }
 
     /**
@@ -32,43 +34,12 @@ public class MiniProgramUtil {
      * @param messageJson 消息
      */
     public static void pushTicketMsgToUser(String accessToken, WxMessageJson messageJson) {
-        try {
-            OpenIdJson json = get(String.format(WEI_XIN_MESSAGE_URL, accessToken));
-            if (json.isSuccess()) {
-                log.info("MINI PROGRAM PUSH MESSAGE SUCCESSFULLY");
-            } else {
-                log.info("MINI PROGRAM PUSH MESSAGE FAILED");
-            }
-        } catch (Exception e) {
+        Response response = HttpUtil.get(String.format(WEI_XIN_MESSAGE_URL, accessToken), null);
+        OpenIdJson json = HttpUtil.parseResponseToObject(response, OpenIdJson.class);
+        if (null != json && json.isSuccess()) {
+            log.info("MINI PROGRAM PUSH MESSAGE SUCCESSFULLY");
+        } else {
             log.info("MINI PROGRAM PUSH MESSAGE FAILED");
-        }
-    }
-
-    private static OpenIdJson get(String urlPath) throws AppException {
-        BufferedReader in = null;
-        try {
-            URL url = new URL(urlPath);
-            URLConnection connection = url.openConnection();
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
-            connection.connect();
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder stringBuffer = new StringBuilder();
-            String line;
-            while ((line = in.readLine()) != null) {
-                stringBuffer.append(line);
-            }
-
-            return JSONObject.parseObject(stringBuffer.toString(), OpenIdJson.class);
-        } catch (Exception e) {
-            throw new AppException("获取微信用户唯一标识失败");
-        } finally {
-            try {
-                assert in != null;
-                in.close();
-            } catch (IOException e) {
-                log.error("", e);
-            }
         }
     }
 }
