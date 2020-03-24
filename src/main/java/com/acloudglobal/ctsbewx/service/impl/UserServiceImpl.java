@@ -29,33 +29,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public BindInfoDTO bindOpenIdToUser(BindUserDTO dto) throws AppException {
         BindInfoDTO bindInfoDTO = new BindInfoDTO();
-        UserOpenid userOpenid = userOpenidRepository.findOne(dto.getOpenid());
-
-        User user;
-        if (null != userOpenid) {
-            user = userRepository.findOne(userOpenid.getUserUid());
-            bindInfoDTO.setHost(user.getHost());
-            bindInfoDTO.setToken(user.getToken());
-
-            return bindInfoDTO;
-        }
-
         List<User> users = userRepository.findOneByAcctId(dto.getAcctId());
         if (CollectionUtils.isEmpty(users)) {
             throw new AppException("账户不存在");
         }
 
-        user = userRepository.findOneByUserNameAndAcctId(dto.getUserName(), dto.getAcctId());
+        User user = userRepository.findOneByUserNameAndAcctId(dto.getUserName(), dto.getAcctId());
         if (null == user || !user.getPassword().equalsIgnoreCase(DigestUtils.md5Hex(dto.getPassword()))) {
             throw new AppException("用户名或密码错误");
         }
 
-        userOpenid = new UserOpenid();
-        userOpenid.setOpenid(dto.getOpenid());
-        userOpenid.setUserUid(user.getUid());
-        userOpenid.setOrderStatus(OrderStatusEnum.NO);
-        userOpenid.setCreateTime(new Date());
-        userOpenidRepository.save(userOpenid);
+        UserOpenid userOpenid = userOpenidRepository.findUserOpenidByOpenidAndUserUid(dto.getOpenid(),user.getUid());
+
+        if (null == userOpenid) {
+            userOpenid = new UserOpenid();
+            userOpenid.setOpenid(dto.getOpenid());
+            userOpenid.setUserUid(user.getUid());
+            userOpenid.setOrderStatus(OrderStatusEnum.NO);
+            userOpenid.setCreateTime(new Date());
+            userOpenidRepository.save(userOpenid);
+        }
 
         bindInfoDTO.setToken(user.getToken());
         bindInfoDTO.setHost(user.getHost());
