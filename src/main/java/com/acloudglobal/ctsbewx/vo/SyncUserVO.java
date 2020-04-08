@@ -26,8 +26,6 @@ public class SyncUserVO {
      * 登录密码
      */
     @NotEmpty(message = "密码不能为空")
-    @Pattern(regexp = "^(?![0-9]+$)(?![^0-9]+$)(?![a-zA-Z]+$)(?![^a-zA-Z]+$)(?![a-zA-Z0-9]+$)[a-zA-Z0-9\\S]{8,20}$",
-             message = "密码由8~20位数字、英文字母或者特殊字符组成")
     private String password;
 
     /**
@@ -40,8 +38,8 @@ public class SyncUserVO {
      * 租户后台域名
      */
     @NotEmpty(message = "租户后台域名不能为空")
-    @Pattern(regexp = "^http://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$",
-             message = "租户后台域名格式不正确")
+    @Pattern(regexp = "((?:(?:25[0-5]|2[0-4]\\\\d|[01]?\\\\d?\\\\d)\\\\.){3}(?:25[0-5]|2[0-4]\\\\d|[01]?\\\\d?\\\\d))",
+             message = "租户后台IP格式不正确")
     private String host;
 
 }
