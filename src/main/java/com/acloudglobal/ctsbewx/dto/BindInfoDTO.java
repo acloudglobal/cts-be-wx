@@ -12,5 +12,5 @@ public class BindInfoDTO {
     /**
      * 租户后台域名
      */
-    private String host;
+    private String acctUid;
 }

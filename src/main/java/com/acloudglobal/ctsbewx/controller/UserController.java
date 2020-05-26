@@ -22,7 +22,7 @@ public class UserController {
         dto.setAcctId(vo.getAcctId());
         dto.setUserName(vo.getUserName());
         dto.setPassword(vo.getPassword());
-        dto.setHost(vo.getHost());
+        dto.setAcctUid(vo.getAcctUid());
         dto.setToken(vo.getToken());
 
         userService.syncUser(dto);

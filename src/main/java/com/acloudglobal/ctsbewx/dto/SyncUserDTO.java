@@ -26,8 +26,8 @@ public class SyncUserDTO {
     private String token;
 
     /**
-     * 租户后台域名
+     * 账户UID
      */
-    private String host;
+    private String acctUid;
 
 }

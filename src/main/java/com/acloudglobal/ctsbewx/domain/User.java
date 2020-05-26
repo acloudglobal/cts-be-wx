@@ -38,9 +38,9 @@ public class User {
     private String token;
 
     /**
-     * 租户后台域名
+     * 账户UID
      */
-    private String host;
+    private String acctUid;
 
     /**
      * 创建时间

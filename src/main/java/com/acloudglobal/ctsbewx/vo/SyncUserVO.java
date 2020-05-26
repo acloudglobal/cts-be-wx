@@ -35,11 +35,9 @@ public class SyncUserVO {
     private String token;
 
     /**
-     * 租户后台域名
+     * 账户编码
      */
-    @NotEmpty(message = "租户后台域名不能为空")
-    @Pattern(regexp = "^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$",
-             message = "租户后台IP格式不正确")
-    private String host;
+    @NotEmpty(message = "账户UID不能为空")
+    private String acctUid;
 
 }
