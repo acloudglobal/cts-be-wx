@@ -39,7 +39,7 @@ public class AuthController {
         BindInfoDTO bindInfoDTO = userService.bindOpenIdToUser(dto);
 
         BindInfoVO bindInfoVO = new BindInfoVO();
-        bindInfoVO.setHost(bindInfoDTO.getHost());
+        bindInfoVO.setAcctUid(bindInfoDTO.getAcctUid());
         bindInfoVO.setToken(bindInfoDTO.getToken());
 
         return bindInfoVO;
