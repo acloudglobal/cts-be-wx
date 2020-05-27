@@ -51,7 +51,8 @@ public class UserServiceImpl implements UserService {
         }
 
         bindInfoDTO.setToken(user.getToken());
-        bindInfoDTO.setAcctUid(user.getAcctUid());
+        bindInfoDTO.setAcctId(user.getAcctId());
+
 
         return bindInfoDTO;
     }
@@ -70,7 +71,6 @@ public class UserServiceImpl implements UserService {
             user.setUserName(dto.getUserName());
             user.setPassword(dto.getPassword());
             user.setToken(dto.getToken());
-            user.setAcctUid(dto.getAcctUid());
             user.setCreateTime(new Date());
         } else {
             user.setPassword(dto.getPassword());

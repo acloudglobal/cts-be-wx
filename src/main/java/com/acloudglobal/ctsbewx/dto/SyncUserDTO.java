@@ -25,9 +25,4 @@ public class SyncUserDTO {
      */
     private String token;
 
-    /**
-     * 账户UID
-     */
-    private String acctUid;
-
 }

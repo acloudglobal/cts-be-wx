@@ -38,11 +38,6 @@ public class User {
     private String token;
 
     /**
-     * 账户UID
-     */
-    private String acctUid;
-
-    /**
      * 创建时间
      */
     @Column(name = "create_time")

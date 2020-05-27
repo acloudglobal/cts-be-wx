@@ -10,7 +10,7 @@ public class BindInfoDTO {
     private String token;
 
     /**
-     * 租户后台域名
+     * 账户ID
      */
-    private String acctUid;
+    private String acctId;
 }

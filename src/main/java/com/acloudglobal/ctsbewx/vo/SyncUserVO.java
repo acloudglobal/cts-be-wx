@@ -34,10 +34,4 @@ public class SyncUserVO {
     @NotEmpty(message = "接入秘钥不能为空")
     private String token;
 
-    /**
-     * 账户编码
-     */
-    @NotEmpty(message = "账户UID不能为空")
-    private String acctUid;
-
 }
